@@ -1,0 +1,57 @@
+#DOCKER
+
+docker pull [image]:[tag] => Irá fazer o pull da versão especificada, docker pull debian:9;
+=============================================================================================================================
+
+docker ps => Mostra os Containers ativos/em execução; (Antiga Sintaxe)
+docker container ls => Mostra os Containers ativos/em execução; (Nova Sintaxe)
+docker ps -a => Mostra todos os Containers que foram ativos recentemente;
+=============================================================================================================================
+
+docker images => Todas as imagens existentes;
+=============================================================================================================================
+
+docker run [nome] => Cria o Container especificado; (Antiga Sintaxe)
+docker container run [nome] => Cria o Container especificado; (Nova Sintaxe)
+docker run [nome] sleep [tempo] => AtCriaiva o Container especificado pelo tempo em segundos especificado;
+docker run -it [nome] => Cria o Container e permite interações, entra no Container, exemplo SO Ubuntu;
+docker run -dit [nome] => Cria o Container no background, permite interações, mostra o id do Container, exemplo: SO Ubuntu,
+ se não estiver no repositorio, será feito o clone e depois será executado;
+docker run -dti [nome]:[tag] => Cria o Container especificado; (Antiga Sintaxe)
+docker run -dit --name [nome] [image] => Da nome aos Containers, exemplo: docker run -dti --name Ubuntu-A ubuntu;
+docker run -e[nome variavel] --name [nome] -d -p [porta]:[porta root] [image] => Cria o Container especificado, adicionando uma
+ variável de ambiente, configura a porta a ser utilizada, da nome para o Container, executa em background, exemplo:
+  docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-A -d -p 3308:3306 mysql
+=============================================================================================================================
+
+docker start [nome] => Reinicia o conteiner ja criado;
+=============================================================================================================================
+
+docker exec -it [nome] ou [nome] [comando] => Entra no Container;
+docker exec [nome] [comando] => Executa o comando especificado, exemplo: docker exec Ubuntu-A /bin/bash ou
+ docker exec Ubuntu-A mkdir /destino;
+=============================================================================================================================
+
+docker stop [nome] ou [id] => Para o Container especificado;
+=============================================================================================================================
+
+docker rm [nome] ou [id] => Exclui o Container especificado;
+docker rmi [nome] => Exclui a imagem especificada;
+=============================================================================================================================
+
+
+docker cp [nome arquivo ou pasta] [nome container]:[/local] => Envia arquivos para o Container, exemplo:
+ docker cp "Comandos Docker.txt" Ubuntu-B:/destino ou docker cp Anotações Ubuntu-A:/destino;
+docker cp [origem] [nome no local destinado] => Copia arquivos do Container, exemplo:
+ docker cp Ubuntu-A:/destino/MeuArquivoTeste MeuArquivoTesteCopia
+=============================================================================================================================
+
+#ATIVIDADES
+
+docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-A -d -p 3308:3306 --volume=c:/Users/Carvalho/data/mysql-A:/var/lib/mysql mysql =>
+ Salva as informações do banco em local externo do container
+==============================================================================================================================
+
+docker run -dti --mount type=bind,src=c:/Users/Carvalho/data/mysql-A,dst=/data,ro mysql => Especifica o tipo do conteiner,
+ sua localização e somente leitura;
+=============================================================================================================================== 
