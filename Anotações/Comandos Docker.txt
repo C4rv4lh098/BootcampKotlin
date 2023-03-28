@@ -22,6 +22,8 @@ docker run -dit --name [nome] [image] => Da nome aos Containers, exemplo: docker
 docker run -e[nome variavel] --name [nome] -d -p [porta]:[porta root] [image] => Cria o Container especificado, adicionando uma
  variável de ambiente, configura a porta a ser utilizada, da nome para o Container, executa em background, exemplo:
   docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-A -d -p 3308:3306 mysql
+docker run -- name [nome] -dti -m [qtd] --cpus [qtd] => Cria o container com nome, em background e especifica a
+ quantidade de memoria utilizada, exemplo: docker run Ubuntu-C -dti -m 128M --cpus 0.2
 =============================================================================================================================
 
 docker start [nome] => Reinicia o conteiner ja criado;
@@ -55,3 +57,35 @@ docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-A -d -p 3308:3306 --volu
 docker run -dti --mount type=bind,src=c:/Users/Carvalho/data/mysql-A,dst=/data,ro mysql => Especifica o tipo do conteiner,
  sua localização e somente leitura;
 =============================================================================================================================== 
+
+#COMANDOS IMPORTANTES
+
+docker info => informações do servidor;
+===============================================================================================================================
+
+docker container logs [nome] ou docker logs [nome] => Mostra o logs
+===============================================================================================================================
+
+docker container top [nome] ou docker top [nome] => Mostra os processos em execução no container especificado
+===============================================================================================================================
+
+#REDES
+Containers em uma mesma rede podem se comunicar entre si;
+
+docker network inspect [nome rede] => Inspeciona a rede
+================================================================================================================================
+
+docker network bridge => Rede padrão dos Containers. 
+================================================================================================================================
+
+docker network create [nome] => Cria uma rede 
+=================================================================================================================================
+
+docker run [nome] --network [nome Rede] [image] => Cria o Container e adiciona a rede especificada; 
+=================================================================================================================================
+
+#LIMITES
+
+docker stats [nome] =>Estatus do Container, exemplo: docker stats php-A
+docker update [nome] -m [quantidade] --cpus [%] => Atualizar informações exemplo: docker update php-A -m 128M --cpus 0.2
+================================================================================================================================
